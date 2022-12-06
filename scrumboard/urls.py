@@ -15,15 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from scrumboard.api import CardViewSet, ListViewSet
+from . import views
+# from scrumboard.api import CardViewSet, ListViewSet
 from rest_framework.routers import DefaultRouter
 
-router = DefaultRouter()
-router.register(r'lists',ListViewSet)
-router.register(r'cards',CardViewSet)
 
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-# ]
 
-urlpatterns = router.urls
+# router = DefaultRouter()
+# router.register(r'lists',ListViewSet)
+# router.register(r'cards',CardViewSet)
+
+urlpatterns = [
+    # path('admin/', admin.site.urls),
+    # path(''. views.home, name='home')
+    path('', views.home, name='home'),
+    path('<str:room>/',views.room,name='room'),
+    path('checkview',views.checkview,name='checkview'),
+    path('send',views.send,name='send'),
+    path('getMessages/<str:room>/',views.getMessages,name='getMessages')
+]
+
+# urlpatterns = router.urls
