@@ -124,20 +124,34 @@ setInterval(function(){
     background-color: #f2f2f2;
     padding: 20px;
     }
+    body{
+    background-color: #7FFFD4;
+    }
     </style>
 
     <form id="post-form">
         {% csrf_token %}
         <input type="hidden" name="username" id="username" value="{{username}}"/>
         <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
-        <input type="text" name="message" id="message" width="100px" />
-        <input type="submit" value="Send">
+        <p id="typing"></p>
+        <input type="text" name="message" id="message" width="100px" onclick="someoneTypes()"/>
+        <input type="submit" value="Send"onclick="resetText()">
     </form>
 </div>
 
 
 </body>
 
+<script>
+    function someoneTypes() {
+        $("#typing").text("Utilizatorul {{username}} scrie");
+    }
+    function resetText(){
+        $("#typing").text("");
+    }
+
+
+</script>
 <script type="text/javascript">
   $(document).on('submit','#post-form',function(e){
     e.preventDefault();
@@ -158,5 +172,4 @@ setInterval(function(){
     document.getElementById('message').value = ''
   });
 </script>
-
 </html>
